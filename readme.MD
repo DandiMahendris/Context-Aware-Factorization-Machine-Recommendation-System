@@ -428,11 +428,13 @@ Neighborhood Collaborative Filtering Approach work by finding similarities eithe
 
 Lets given a two user of user-u and user-j with two item-i and item-h, for item-to-item CF, we will defined similarity between item-i and item-h.
 
-$$ \hat{r}_{ui} = baseline_{u,i} + \frac{\sum_{j∈N(u)}(Similarity(i,h). \ (r_{ji} - baseline_{u,h}))}{\sum_{j∈N(u)} Similarity(i,h)}$$ 
+$$
+\hat{r}_{ui} = \text{baseline}_{u,i} + \frac{\sum_{j \in N(u)} (\text{Similarity}(i,h) \cdot (r_{ji} - \text{baseline}_{u,h}))}{\sum_{j \in N(u)} \text{Similarity}(i,h)}
+$$
 
-$\hat{r}_{ui}$ = Predicted ratings from user u on item i<br>
-$r_{ji}$ = ratings from user j on item i<br>
-$\sum_{j∈N(u)}$ = sum through all neighbors from user u<br>
+$ \hat{r}_{ui} $ = Predicted ratings from user u on item i<br>
+$ r_{ji} $ = ratings from user j on item i<br>
+$ \sum_{j∈N(u)} $ = sum through all neighbors from user u<br>
 
 $baseline_{u,i}$ = $\mu_{global} + b_{user u} + b_{item i}$
 
@@ -467,11 +469,13 @@ In user-to-user CF, we will predict rating that will given by user to certain it
 
 The prediction function for user-to-user is similar with the function for item-to-item CF but rather than compute similarity between item-i and item-h we will compute similarity between user-u and user-j
 
-$$ \hat{r}_{ui} = baseline_{u,i} + \frac{\sum_{j∈N(u)}(Similarity(u,j). \ (r_{ji} - baseline_{j,i}))}{\sum_{j∈N(u)} Similarity(u,j)}$$ 
+$$
+\hat{r}_{ui} = \text{baseline}_{u,i} + \frac{\sum_{j \in N(u)} (\text{Similarity}(u,j) \cdot (r_{ji} - \text{baseline}_{j,i}))}{\sum_{j \in N(u)} \text{Similarity}(u,j)}
+$$
 
-$\hat{r}_{ui}$ = Predicted ratings from user u on item i<br>
-$r_{ji}$ = ratings from user j on item i<br>
-$\sum_{j∈N(u)}$ = sum through all neighbors from user u<br>
+$ \hat{r}_{ui} $ = Predicted ratings from user u on item i<br>
+$ r_{ji} $ = ratings from user j on item i<br>
+$ \sum_{j∈N(u)} $ = sum through all neighbors from user u<br>
 
 $baseline_{u,i}$ = $\mu_{global} + b_{user u} + b_{item i}$
 
@@ -535,7 +539,9 @@ $x_{i},x_{j}$ = feature value<br>
 
 The first part of the FM model contains the unary interactions of each input variable $x_{i}$ with the target—exactly as in a linear regression model. The second part with the two nested sums contains all pairwise interaction of input variabls, that is $x_{i},x_{j}$.The important difference to standard polynomial regression is that the effect of the interaction is not modeled by an independent parameter $w_{i,j}$ but with a factorized parametrization $w_{ij} ≈ \ <v_{i},v_{j}> \ = \sum^{k}_{f}v_{i,f}.v_{j,f}$, which corresponds to the assumption that the effect of pairwise interactions has a low rank. This allows FM to estimates reliable parameter even in highly sparse data where standard models fail (Rendle, 2012).
 
-$$  f(x) = w_{0} + \sum^{n}_{i=1}w_{i}.x_{i} + \frac{1}{2}\sum^{k}_{f=1}[(\sum^{n}_{i}v_{i,f}.x_{i})^2 - \sum^{n}_{i=1}v_{j,f}^2.x_{j}^2] $$ 
+$$
+f(x) = w_0 + \sum_{i=1}^{n} w_i x_i + \frac{1}{2} \sum_{f=1}^{k} \left[ \left( \sum_{i=1}^{n} v_{i,f} x_i \right)^2 - \sum_{i=1}^{n} v_{j,f}^2 x_j^2 \right]
+$$
 
 $v_{i,f}$ = latent factor value from feature i at position f (scalar) <br>
 $k$ = number of latent factor

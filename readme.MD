@@ -164,7 +164,7 @@ The "Very Negative" rating has the fewest counts that given 92 times by users in
 ### Price Rates
 
 <p align=center>
-<img src="pcis/newplot-2.png" width=70%>
+<img src="pics/newplot-2.png" width=70%>
 </p>
 
 Since we are intended to use price as context to define what rating will user given to certain item based on its price range. These price range is subjective and in this projcet are separated into 5 categories. 

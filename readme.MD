@@ -7,57 +7,89 @@
   <li><a href="#about-the-project">About The Project</a></li>
   <li><a href="#business-objective">Business Objective</a></li>
   <li><a href="#business-metrics">Business Metrics</a></li>
-  <li><a href="#getting-started">Getting Started</a></li>
+  <li><a href="#dataset">Dataset</a></li>
+  <li><a href="#method">Methods</a></li>
   <li>
-    <a href="#data-workflow">Data Workflow</a>
+    <a href="#exploratory-data-analysis">Exploratory Data Analysis</a>
     <ul>
-      <li><a href="#dataset">Dataset</a></li>
-      <li><a href="#data-preparation">Data Preparation</a></li>
-      <li><a href="#data-preprocessing-and-feature-engineering">Data Preprocessing and Feature Engineering</a></li>
-      <li><a href="#data-modelling">Data Modelling</a></li>      
+      <li><a href="#ratings">Ratings</a></li>
+      <li><a href="#price-rates">Price Rates</a></li>
+      <li><a href="#release-date-range">Release Data Range</a></li>
+    </ul>
+  </li>
+  <li><a href="#preprocessing-and-featuring-data">Preprocessing and Featuring Data</a></li>
+  <li>
+    <a href="#1-content-based-recommendation-system">Content-Based Recommendation System</a>
+    <ul>
+      <li><a href="#text-preprocessing-tokenization">Tokenization</a></li>
+      <li><a href="#text-preprocessing-stemming">Stemming</a></li>
+      <li><a href="#text-preprocessing-term-frequency-tf-and-inverse-document-frequency-idf-vectorizer">TF-IDF</a></li>
+      <li><a href="#cosine-similarity">Cosine Similarity</a></li>
+      <li><a href="#content-similar-recommendation">Similarity Recommendation</a></li>
+      <li><a href="#novelty">Novelty</a></li>
+      <li><a href="#serependity">Serependity</a></li>
     </ul>
   </li>
   <li>
-    <a href="#prediction-using-api-and-streamlit">Prediction using API and Streamlit</a>
+    <a href="#2-neighborhood-collaborative-filtering">Neighborhood Collaborative Filtering</a>
     <ul>
-      <li><a href="#how-to-run-by-api?">How To Run by API?</a></li>
-      <li><a href="#data-input">Data Input</a></li>
+      <li><a href="#utility-matrix">Utility Matrix</a></li>
+      <li><a href="#item-to-item-neighbor-cf">Item-to-Item Neighborhood Collaborative Filtering</a></li>
+      <li><a href="#user-to-user-neighbor-cf">User-to-User Neighborhood Collaborative Filtering</a></li>
+      <li><a href="#recommendation-system-evaluation-rmse">Recommendation System Model Evaluation</a></li>
     </ul>
   </li>
+  <li>
+    <a href="#3-context-aware-factorization-machines">Context-Aware Factorization Machines</a>
+    <ul>
+      <li><a href="#factorization-machines">Factorization Machines</a></li>
+      <li><a href='#fm-regression-optimization-tasks'>FM Regression Optimization</a></li>
+      <li><a href="#fm-regression-model">FM Regression Models</a></li>
+      <li><a href="#fm-regression-optimization-tasks">FM Classification Optimization</a></li>
+      <li><a href="#fm-classification-models">FM Classification Models</a></li>
+      <li><a href="#fm-classification-models-performance">FM Classification Model Performance</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="#alternating-least-square">Alternating Least Square</a>
+    <ul>
+      <li><a href="#als-models">Alternating Least Square Model</a></li>
+    </ul> 
+  </li>
+  <li><a href="#conclusion">Conclusion</a></li>
+  <li><a href="#references">References</a></li>
 </ol>
 
 <!-- About the Project -->
-# Recommendation System
+# About the Project
 
-Steam platform is the biggest video game digital distribution service for PC Gaming nowadays under Valve Corporartion. According to annual statistics report in 2022, steam reached peak of online user count of 33 millions with impressive number of game downloads up to 44.7 billion gigabytes downloaded over the year. One of the key reasons Steam is growing so rapidly is the good search-ability in store, which was mentioned in the report as well. They are working on a new recommendation system driven by machine learning to find games that match the player’s personal preferences. Although the algorithm is just part of the search-ability solution, they are also building more live and appreciation features and continually evaluating the overall design of the store.
+Steam is currently the largest digital distribution service for PC gaming, operated by Valve Corporation. According to the annual statistics report for 2022, Steam reached a peak online user count of 33 million, with an impressive 44.7 billion gigabytes of game downloads over the year. One of the key reasons for Steam's rapid growth is its strong searchability in the store, which was highlighted in the report. They are actively working on a new recommendation system driven by machine learning to help users find games that match their personal preferences. While the algorithm is just one part of the searchability solution, they are also developing more interactive and user-friendly features, continually evaluating the overall store design.
 
-On the other hand, the recommender system also affected by Matthew Effect, which means those games developed by big game developing companies receive more budget on advertisement so that they can be very popular. Popular games will appear on the top position on the store web pages and attract more users to buy including you and your friends. Meanwhile, games developed by small studios or individual developers are not that lucky. Some midle-budget user is more likely to wait their own preference games that will be launched on few month ahead or just simply waiting their preference games to get discount. It can leads this typical user to churn or inactive in some periods meanwhile theres should be bunch of hidden gems that matched their preference based on user activity log or given rating on several games.
+On the flip side, the recommender system in marketplace is commonly also affected by the *Matthew Effect*, which means that games developed by large game companies receive more advertising budgets and, consequently, become very popular. Popular games often appear at the top of store web pages and attract more users, including you and your friends, to make purchases. In contrast, games developed by small studios or individual developers may not have the same advertising luck. Some mid-budget users are more inclined to wait for their preferred games to be launched a few months later or simply wait for discounts on their preferred games. This can lead these typical users to become inactive or even churn, even though there may be hidden gems that match their preferences based on user activity logs or given ratings for various games.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 # Business Objective
 
-Our goal is to create a recommendation system approach for product-suggestions focusing on those middle-user that which games they will buy based on their given rating or preference (activity log) that more likely to be a hidden gems like either lowest price product or untrending games that comes out not from big games developer.
+Our goal is to develop a recommendation system approach for product suggestions, with a focus on middle-tier users who make purchasing decisions based on their given ratings or preferences (as indicated by their activity logs). We aim to identify hidden gems, which could be either budget-friendly on medium price range options or lesser-known games from smaller developers, rather than those produced by major game developers.
 
-- First method is **Content-based recommendation system**, is to generate more similar games but, focusing in **novelty** (how unknown user to related item) and **serependity** (how related the item to user) to get less trending games.
+- First method is **Content-based recommendation system**, is to generate more similar games but, focusing in **novelty** (how unknown user to related item) and **serependity** (how related the item to user) to help users discover new gaming experiences.
 
 - Second, is **Collaborative Filtering** with **Context-Aware Factorization Machine** for price rate and release date of games to give recommendation based on rating given (*Regression*) and do user recommend it or not (*Classification*).
 
 - Third, is **Collaborative Filtering** with **Bayesian Pesonalized Ranking** and **Alternating Least Square** to utilize the implicit data (hours play) by user.
 
-The dataset will come out in three parts, first one include User IDs, Game IDs, Rating (*Explicit*), the hours they had played (*Implicit*) and do they recommended it or not. Second part is content based likely consist the game's title, genre, description, release date and price-range. These dataset is retrieved from Kaggle Dataset of [**Steam's user log**](https://www.kaggle.com/datasets/antonkozyriev/game-recommendations-on-steam) and [**Steam's game description**](https://www.kaggle.com/datasets/trolukovich/steam-games-complete-dataset) which are updated until 2022-12-31.
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 # Business Metrics
 
-We evaluate the accuracy of our results by separating the dataset into a test set and a training set. Specifically, we attempt to predict the values in the test set using the training set. 
+We evaluate the accuracy of our results by separating the dataset into a test set and a training set. Specifically, we attempt to predict the values in the test set using the training set fitted. 
 
-The evaluation metrics that will be used in this recommendation system approach is **nDCG** for *N-Ranking recommendation* and **RMSE** for *Rating-based prediction*.
+The evaluation metrics that will be used in this recommendation system approach is **RMSE** for *Rating-based prediction*, **F1-Score** for *Class classfication prediction* and **nDCG** for *Ranking recommendation*.
 
 # Dataset
 
-**Steam's User log** is consist total **[37.800.000, 23]** and **steam games description** is consist total of **[40.000, 20]**. However for 37.8 Mio in total instance will greatly cost computational time in training the recommendation system, hence we reduce to used only **1000_000** total instances. Dataset is splitted using `train_test_split` library from `sklearn.model_selection` package to produce equal distributed features from the original data.
+The datasets is retrieved from Kaggle Dataset of [**Steam's user log**](https://www.kaggle.com/datasets/antonkozyriev/game-recommendations-on-steam) and [**Steam's game description**](https://www.kaggle.com/datasets/trolukovich/steam-games-complete-dataset) which are updated until 2022-12-31. **Steam's User log** is consist total **[37.800.000, 23]** and **steam games description** is consist total of **[40.000, 20]**. However for 37.8 Mio in total instance will greatly cost computational time in training the recommendation system, hence we reduce to used only **1000_000** total instances. Dataset is splitted using `train_test_split` library from `sklearn.model_selection` package to produce equal distributed features from the original data.
 
 <style>
     table {
@@ -138,19 +170,19 @@ The "Very Negative" rating has the fewest counts that given 92 times by users in
 Since we are intended to use price as context to define what rating will user given to certain item based on its price range. These price range is subjective and in this projcet are separated into 5 categories. 
 
 - $0 - $7.5 (Free - IDR 120,000) as **cheap** games. <br>
-Free games is not casually considered high for certain user and most likely offer buy-in-game (skins, characters) such as Fornite, Valorant, Genshin Impacts. under $7.5 (IDR 120.000) games is considered as best affordable game's price and most likely some good games is reduced by discount into this category. Most users is would buy game in this price range either because its affordable or only for waiting big games that would come out later.
+Free games is not casually considered high for certain user and most likely offer buy-in-game (skins, characters) such as Fornite, Valorant, Genshin Impacts. under $7.5 (IDR 120.000) games are considered the best affordable games, with many good titles often reduced in price through discounts. Most users opt for games in this price range either because they are budget-friendly or while waiting for the release of larger games.
 
 - $7.5 - $22.5 (IDR 120,000 - IDR 350,000) as **medium** games. <br>
-This price range is considered as good game's price, sometimes big games will be discounted into this price range. The big trending games over 3 years release date also fall into this price range.
+Games in this range are considered a good value, and occasionally, even big-name games are discounted to this price range. It's also common to find popular games released within the last three years in this category.
 
 - $23 - $33 (IDR 350,000 - IDR 500,000) as **expensive** games. <br>
-Currently, more newest games is more likely fall into this price range and also the biggest game price might come into this price range after discount.
+Newer games tend to fall within this price range, and the highest-priced games may occasionally drop into this category after discounts.
 
 - $33 - $53 (IDR 500,000 - IDR 800,000) as **luxury** games. <br>
-Trending or newest AAA games is most likely come into this price range, but price range should not be considered if user want to experience luxury trending games.
+Trending or the latest AAA games are more likely to be priced in this range, although users should not hesitate to invest in luxury trending games if they desire the experience.
 
 - $53 - ~ (IDR 800,000) as **overpriced** games.<br>
-This price range consider as the most expensive game's price on steams and only few users come to afford.
+Games in this price range are the most expensive on Steam, and only a few users can afford them.
 
 ### Release date range
 
@@ -161,19 +193,19 @@ This price range consider as the most expensive game's price on steams and only 
 Release date is also will be considered to use in defined predicted rating that user would give. Some user is more likely not prefer over 10 years released date games and consider more into new stuff. Release date range are separated into 5 ranges:
 
 - 0 - 1 years as **newest**.<br>
-Some games that released on this range more likely have high prices and lower interactions, but low prices game with more high rating given is considered as good stuff.
+Some games in this range may have high prices and relatively lower user interactions, but games with lower prices and higher user ratings are considered as good stuff (hidden games).
 
 - 1 - 3 years as **new**.<br>
-Few games start to get some discounts when comes into this ranges and consider as most-waiting games that user want to buy. Games on this range will have more interactions count rather than above.
+Many users eagerly await games in this range, and some of them start to receive discounts. Games within this timeframe generally have a higher user interaction count compared to newer releases.
 
 - 3 - 5 years as **mid**.<br>
-Big AAA games would fall into good prices after come into this range.
+Big AAA games often become more affordable after being in this range for a while.
 
 - 5 - 10 years as **old**.<br>
-Some user still want to play this games range and its price is drastically reduced, so this range is most affordable games.
+Some users still have an interest in playing games from this range, and their prices are significantly reduced, making them the most affordable option.
 
 - over 10 years as **outdated**.<br>
-User will have low preference to outdated games.
+Users typically have lower preferences for games that have been around for more than a decade.
 
 # Preprocessing and Featuring Data
 
@@ -325,9 +357,10 @@ def calculate_novelty_based_on_rarity(app_data):
 <img src="pics/4.png" width=70%>
 </p>
 
-Recommendation system with novelty score considered is indeed give more better result over previous recommendation. It give similarity game genre and tags (Open-world, RPG) toward Assassin's Creed Odyssey like Ghost Recon Wildlands, Dishonered, Far Cry 5, etc. However some game recommendation turn out to be less similarity like FrostPunk which considered as strategy builder games but it might have some similar tags with our games. This issue can be resolved by added more related genre or tags and remove unrelated tags in tokenization process.
+A recommendation system that takes into account the novelty score indeed yields better results compared to the previous recommendation methods. It considers similarities in game genres and tags, such as 'Open-world' and 'RPG,' when suggesting games like Assassin's Creed Odyssey. This approach results in recommendations like Ghost Recon Wildlands, Dishonored, and Far Cry 5. However, there are instances where the recommended games, like FrostPunk, may not be very similar in terms of genre but share some relevant tags with our target game. This issue can be addressed by incorporating additional related genres or tags while also filtering out unrelated tags during the tokenization process.
 
-Novelty score can produce high score since number of unique user is in biggest number, in this case total user is 10266 in total. However, the novelty can become a bias since more recent games (**new released game**) **have lower interactions_count**, e.g Far Cry 5, Watch Dogs 2
+The novelty score can generate high scores, primarily due to the large number of unique users, which in this case totals 10,266. However, it's important to note that novelty can introduce **bias**, especially for more **recently released games**, as they tend to have **lower interaction counts**. For instance, games like Far Cry 5 and Watch Dogs 2 may receive lower interaction counts simply because they are newer releases.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Serependity
@@ -351,7 +384,11 @@ while i = item in user recommendation<br>
 <img src="pics/5.png" width=70%>
 </p>
 
-Serependity score based recommendation return more randomize games that similar to our searched games (Assassin's Creed: Odyssey) but still seemingly relevant, e.g. No Man's Sky, Fallout 4, Far Cry 5 and ARK: Survival World as action, RPG, open-world games. This recommendation should be good enough to recommend to user who prefer game like Assassin's Creed: Odyssey.
+A recommendation system based on the serendipity score tends to provide more randomized game suggestions that, while not precisely similar to our searched game (Assassin's Creed: Odyssey), still appear relevant. For example, it might suggest games like No Man's Sky, Fallout 4, Far Cry 5, and ARK: Survival World, which are categorized as action, RPG, and open-world games. While these recommendations may not align perfectly with the searched game, they can be appealing to users who have a preference for games similar to Assassin's Creed: Odyssey.
+
+The serendipity score is designed to introduce an element of surprise and novelty into the recommendations, which can help users discover new gaming experiences. It takes into account various factors that may not be directly tied to the primary characteristics of the searched game but still share some thematic or gameplay elements. In this case, the recommendations include titles that offer elements of action, RPG elements, and an open-world experience.
+
+The benefit of this approach is that it can prevent the recommendation system from becoming too predictable and may lead users to discover unexpected yet enjoyable games. However, it's important to strike a balance, as excessive randomness may result in less relevant suggestions. Finding the right mix of serendipity and relevance is key to creating an engaging and effective recommendation system.
 
 **Note**: I was the one who play these stuff games so I subjectively enough can say last two recommendation system indeed suggests good recommendations.
 
@@ -362,6 +399,10 @@ Serependity score based recommendation return more randomize games that similar 
 <p align = center>
 <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*3ALliiz9hG79_2xopzgyrQ.png" width=60%>
 </p>
+
+Content-based recommendation systems have demonstrated effectiveness in providing game suggestions based on inherent content characteristics. However, it is important to recognize that individual users often have unique preferences for specific games. Collaborative Filtering techniques leverage these individual preferences to enhance recommendation quality by identifying similarities among users or items.
+
+In particular, Neighborhood Collaborative Filtering focuses on user preferences by considering the behavior of similar users, thus refining the recommendations. We started by employed the K-Nearest Neighbors Baseline (KNNBaseline) algorithm from the Surprise library, which can be applied to both user-to-user and item-to-item Collaborative Filtering, to predict user ratings for specific items. To further enhance our recommendation system, another approaches of Context-Aware Factorization Machines is applied to involve the incorporation of contextual information, such as game pricing and release dates, into the Collaborative Filtering framework. This approach aims to provide users with more tailored and context-aware recommendations, ultimately improving the overall user experience.
 
 ## Utility Matrix
 
@@ -456,9 +497,9 @@ tuning_user = RandomizedSearchCV(algo_class=KNNBaseline, param_distributions= pa
 <img src="pics/image-8.png" width=60%>
 </p>
 
-We got the **item-to-item CF** as the best model on predicted rating with **rmse : 0.691921**, followed by item-to-item CF with **rmse: 0.692955**. However, in this function we just calculate the predicted rating given without context-aware added into the model, so it prone to recommend the most similar item to certain user that likely come from similar game title or game developer by ignoring its released date range or price range at the first place. 
+The **User-to-User Neighborhood Collaborative Filtering** model has been identified as the better model for predicting ratings in this case, with an **RMSE (Root Mean Square Error)** of **0.691921**, closely followed by the Item-to-Item CF model with an **RMSE of 0.692955**. However, it's important to note that these models calculate predicted ratings without taking context-aware factors into account. Consequently, they may tend to recommend items that are most similar to a user's past preferences, such as games with similar titles or from the same developer, while ignoring considerations like release date range or price range.
 
-This might affect the user to reluctant to buy the same title games again (e.g Assassins Creed Franchise, Far Cry Franchise, etc.) or unaffordable game (high price games). However, some user sometimes more likely to play game from same franchise again and again, and its good to show those games in offering since it can increase likelihood of user to buy.
+This approach could potentially lead to users being reluctant to purchase games they already own in a particular franchise (e.g., Assassin's Creed Franchise, Far Cry Franchise) or games that are priced beyond their budget. However, it's worth acknowledging that some users have a strong inclination to replay games from the same franchise repeatedly, and it can be beneficial to showcase such games as part of the recommendations. This approach can increase the likelihood of users making a purchase, aligning with their preferences, and enhancing their overall gaming experience.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -561,11 +602,15 @@ Let's try this recommendation to get N-recommendation games on certain user IDs.
 <img src="pics/image-11.png" width=70%>
 </p>
 
-Here are the recommendation of of two price range based on user IDs **3924036** preference, the **first 10<sup>th</sup>** are the recommendation games for **medium price range** while the **last 10<sup>th</sup>** are the recommendation games for **expensive price range**. According to our objective to refer medium price range for user IDs to increase likelihood of the user to buy the games, the medium price range recommendation should be good for the user. However, the recommendation on expensive range is seemingly more relatable to history log of user IDs **3924036**. The recommendation should be followed the history tracking of the user capability to buy the games, in this example User IDs **3924036** seem has capability to afford expensive or even luxury price games and prefer free games rather than the other cheap games, hence the recommendation is become more randomize.
+These are the recommendations for two price ranges based on User ID **3924036**'s preferences. The first 10<sup>th</sup> recommendations are for medium-priced games, while the last 10<sup>th</sup> recommendations are for expensive ones.  Our primary objective is to steer User ID 3924036 towards the medium-priced games to increase the likelihood of a purchase. However, it's worth noting that the recommendations for expensive games appear to align better with this user's historical gaming preferences.
+
+The recommendations for expensive games seem to be more in line with the user's gaming history and their demonstrated ability to afford pricier titles. In this case, User ID **3924036** appears to have the financial capacity to invest in expensive or even luxury-priced games and displays a preference for free games over cheaper options. As a result, the recommendations in the expensive range appear to be more varied and serendipitous. Ultimately, our recommendation system takes into account both the user's historical preferences and their capability to purchase games. While our primary aim is to guide them towards medium-priced games, we also recognize the importance of presenting recommendations that align with their gaming history and financial capacity.
 
 <p align=center>
 <img src="pics/image-12.png" width=70%>
 </p>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### FM: Classification Objective
 
@@ -585,6 +630,8 @@ $$Objective = \min_{w*,v*}[-\frac{1}{N}\sum_{iED}(y^{(i)}.log(p(x^{(i)})) + (1-y
 - $p(x^{(i)})$ = Probability that x belongs to class 1
 - w* = weight from feature
 - v* = latent factor for feature
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### FM: Classification Models
 
@@ -624,50 +671,49 @@ Accuracy score given by Classification model to predict whether certain User IDs
 # Alternating Least Square
 -----
 
-Bayesian Personalized Ranking algorithm return implicit value of user-item pair into pairwise ranking. Pairwise ranking simply return consumed item as positive item while unconsumed value as Negative item, hence Positive item > Negative item. Based on those concept the algorithm use to update parameter to maximize probability that user like positive item over negative item. We observe that previously model predict each score to item individually, hence our parameter is optimized individually. The issue is we have parameter that focus on giving correct prediction only, not correct ordering. We can compare positive item (consumed item) is more preferred by user over negative item (unconsumed item).
+Utilizing implicit data is tends to takes more in account to consider which user does higher preference, because we do not have scale of preference like explicit data. We just simply create mapping rule to encode play hours into binary value such as preference. By encoding user utility value into binary vaue does not solve which user are having more strong preference/confidence. We could add term confidence (c) which equal to 
 
-Our training data consists of User IDs, Positive sample items (+) and Negative sample items (-). In matrix factorization, utility value such as rating is predicted using $r_{ui} = x_{u}.y^{T}_{i} $. In BPR, we can have confidence term by comparing predicted utility of $\hat{r_{ui}}$ and $\hat{r_{uj}}$ with $ \hat{r_{uij}} = \hat{r_{ui}} - \hat{r_{uj}} $. Sigmoid function is applied to maximize the probability that $r_{ui}$ is bigger than $r_{uj}$.
+$$ c_{ui} = 1 + \alpha{r_{ui}} $$
 
-$$ \hat{r}_{uij} = \hat{r}_{ui} - \hat{r}_{uj} $$
+We want to predict class of user's preference, we could imply that user u preference over item i ($p_{ui}$) could be produced from interaction factor between user and item factor
 
-$$ \sigma{(\hat{r}_{uij})} = \frac{1}{1+e^{-\hat{r_{uij}}}} $$
+$$ \hat{p_{ui}} = x_{u}.y^{T}_{i} $$
 
-Using Bayes Theorem, we want to finding parameter of likelihood given predicting user u preferred item i > j
+$c_{ui}$ = Confidence term from user u to item i<br>
+$r_{ui}$ = utility value from user u to item i<br>
+$\hat{p_{ui}}$ = predicted preference from user u to item i (Binary Values: 0/1)<br>
+$x_{u}$ = user u factor<br>
+$y_{i}$ = item i factor
 
-$$ P(\theta|i>_{u}j) = \frac{P(i>_{u}j|\theta).P(\theta)}{P(i>_{u}j)} $$
+The objective is minimize prediction error of preference from each user to each item in training data, but we might not know the difference between two user who has played the same game. we suspected that the more user spent to play the game, the stronger the confidence, hence we could add confidence term in our objective function.
 
-$P(\theta|i>_{u}j)$ = Probability of parameter $\theta$ given $i>_{u}j$ (posterior probability/training data)
-$P(i>_{u}j|\theta)$ = Probability of $i>_{u}j$ given parameter $\theta$ (likelihood/target)
-$P(\theta)$ = Probability of parameter $\theta$ (prior)
-$P(i>_{u}j)$ = Probability of $i>_{u}j$ (marginal probability/training data)
+$$Objective = min\sum_{u,i} c_{ui} (p_{ui} - \hat{p_{ui}})^2 $$
 
-Since $P(i>_{u}j)$ is constant (observed from training data), we can reduce by
+We can add Ridge Regularization (L2 Norm) to our user and item factor, our purpose to generate prediction on item that user might have not played yet, thus the weight should not be zero
 
-$$P(\theta|i>_{u}j) = P(i>_{u}j|\theta).P(\theta) $$
+$$Objective = min\sum_{u,i} c_{ui} (p_{ui} - \hat{p_{ui}})^2 + \lambda(\sum_{u}\lVert x_{u} \rVert^2 + \sum_{i}\lVert y_{i} \rVert^2) $$
 
-$$P(\theta|i>_{u}j) = \sigma{(\hat{r}_{ui} - \hat{r}_{uj}).P(\theta)} $$
+Here our final objective form
 
-Our goal to find optimal parameter given our training data, what we can do during training process with all our training samples:
+$$ Objective = \min_{x*,y*}\sum_{u,i} c_{ui} (p_{ui} - x^{T}_{u}.y^{T}_{i})^2 + \lambda(\sum_{u}\lVert x_{u} \rVert^2 + \sum_{i}\lVert y_{i} \rVert^2) $$
 
-$$Objective = \max \prod_{u,i,j}\sigma{(\hat{r}_{ui} - \hat{r}_{uj}).P(\theta)}$$
+Alternating least square is applied to optimize the objective form by updating each parameter while holding constant user factor when updating item factor and vice versa. The approach is similar to Gradient Descent by find partial derivative from objective function to our parameter
 
-Since multiplication is expensive on computational time, we could multiply by log natural or logarithmic form to make computational become addition
+$\frac{\partial{Objective}}{\partial{\theta}} = 0 $ while our parameter $\theta = x_{u}$ or $y_{i}$.
 
-$$ Objective = max \sum_{u,i,j}ln(\sigma{(\hat{r}_{ui} - \hat{r}_{uj})}).ln(P(\theta)) $$
+Using the partial derivative function above to each factor, we can obtain update to user factor while holding item factor constant,
 
-Using uniform prior concept with mean=0 and standard deviation=1 we can solve $ln(P(\theta))$ into $f(x) = -\frac{\lVert x_{u} \rVert^2}{2} $ hence our function is consist of User factor $(x_{u})$, item i factor $(y_{i})$ and item j factor $(y_{j})$. 
+$$ x_{u} = (Y^T.C^u.Y + \lambda{I})^{-1} . (Y^T.C^u.p(u)) $$
 
-With $P(i>_{u}j|\theta) = \sigma{(\hat{r}_{ui} - \hat{r}_{uj})}$, and applying logarithmic scale to change multiplication to addition, we can replace the function into:
+and obtain the update to item factor while holding user factor constant,
 
-$$Objective = \max_{x*,y*}\sum_{u,i,j} ln(\sigma{(x_{u}.y^{T}_{i} - x_{u}.y^{T}_{j})}) + ln(P(\theta))$$
+$$ y_{i} = (X^T.C^i.X + \lambda{I})^{-1} . (X^T.C^i.p(i)) $$
 
-By adding L2 Regularization to overcome overfitting model and turn the model into Negative Log Likelihood to optimize the model parameter, the function we will use is
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-$$Objective = \min_{x*,y*}\sum_{u,i,j} - ln(\sigma{(x_{u}.y^{T}_{i} + x_{u}.y^{T}_{j})}) + \frac{\lambda \lVert x_{u} \rVert^2}{2} + \frac{\lambda \lVert y_{i} \rVert^2}{2} + \frac{\lambda \lVert y_{j} \rVert^2}{2} $$
+### ALS Models
 
-### BPR Models
-
-Bayesian Personalized Ranking used in this project is using **`bpr`** from [**`implicit`**](https://github.com/benfred/implicit) libraries toward dataset of consist user IDs, app IDs, and hours user spent on playing certain games, turn into sparse coo matrix in aim to reduce computational cost since we have sparse matrix.
+Alternating Least Square used in this project is using **`als`** from [**`implicit`**](https://github.com/benfred/implicit) libraries toward dataset of consist user IDs, app IDs, and hours user spent on playing certain games, turn into sparse coo matrix in aim to reduce computational cost since we have sparse matrix.
 
 ```python
 def preprocess_implicit_data(data,feature):
@@ -742,23 +788,30 @@ Recommendation given by models represents few well-known games and seemingly rel
 # Conclusion
 -----
 
-- **Content-based recommendation system** based on **similarity** between the items show good suggestion but still typically give similar title or game franchise after all. However this recommendation is good for user who prefer to play same franchise games. In this example, we want to return recommendation for Assassin's Creed Odyssey games, it mostly recommend another Assassin's Creed Games.
+- **Content-based recommendation system** which relies on **similarity** between the items, displays good suggestion. However, it often tends to recommend games with similar titles from the same game franchise. This type of recommendation is well-suited for users who have a preference for playing games within the same franchise. For example, if we are seeking recommendations for games similar to Assassin's Creed Odyssey, it frequently suggests another Assassin's Creed Games.
 
-- **Content-based recommendation with Novelty** indeed give more variability games rather than based on similarity only. The recommendation games seemingly give same genre or popular tags. But still novelty is calculated according to number of interaction created by user toward certain games that really essentials on new released games, since those games don't have big number of interactions at first place.
+- **Content-based recommendation** enhanced by the **Novelty Score**, offers more variability into its game suggestions compared to previous similarity-based approaches. Similar recommendation tend to align with similar genres or popular tags, but novelty is calculated based on user interactions. The novelty-score-driven recommendation system offers a more effective and diverse user experience, but it's important to strike a balance between novelty and relevance, considering factors such as release date and user interaction counts.
 
-- **Content-based recommendation with Serependity** return more randomized games but still keep intact with similarity of searched games regarding genre or popular tags. But somehow some recommendation games found out to be irrelevant games with our searched games (Assassin's Creed Odyssey) that most likely RPG, Open-world, Action but instead give Strategy-based games like Heart of Iron IV or Recruit, despite of those game is medieval theme like Assassin's Creed Odyssey. This circumstance can be considered to reduced some popular tags of games and only find tags that really related to games. However this matter can be resolved by context-aware recommendation system whether it pre-filtered, post-filtered, or calculate interaction terms.
+- **Content-based recommendation** incorporating **Serependity**, offers more diverses game suggestions while maintaining relevance to the searched game's genre or popular tags. The serependity score is designed to introduce element of surprise and novelty into the recommendations, which can help users discover new gaming experiences. It takes into account various factors that may not be directly tied to the primary characteristics of the searched game. The benefit of this approach is that it can prevent the recommendation system from becoming too predictable and may lead users to discover unexpected yet enjoyable games. However, it's important to strike a balance, as excessive randomness may result in less relevant suggestions. 
 
-- Content-based is indeed a good recommendation system so far, but still few user does have their own preference to play or buy certain games. Collaborative Filtering utilize this user's preference to return more better recommendation based on another user similarity. **Neighborhood Collaborative Filtering** utilize the user preference based on neighboor users that has same similarity. The **`KNNBaseline`** from **`surprise`** used for either user-to-user or item-to-item CF to predict rating that would likely given by user to certain item. It turns out that evaluation on loss function using **RMSE having 0.691 on item-to-item and 0.692 on user-to-user collaborative filtering**. Even this recommendation turn out to be having RMSE performance but do not maximize utilization of another context as our first objective such as game's price or game's release date.
+- **K-Nearest Neighbors Baseline (KNNBaseline) algorithm** from the **Surprise** library, is applied to both user-to-user and item-to-item **Collaborative Filtering**, to predict user ratings for specific items.  In our evaluation, we observed that Collaborative Filtering, both **user-to-user and item-to-item, yielded an RMSE (Root Mean Square Error) of approximately 0.691 and 0.692**, respectively. While these RMSE values indicate relatively accurate predictions, they do not fully capitalize on the incorporation of additional contextual factors, such as game pricing or release dates, which was one of our primary objectives.
 
-- Our objective is to recommend a games that having low-medium price for certain user to increase likelihood of user to buy the games. Hence, context like price range could be considered to predict rating of user-u to item-i with price range-c. **Context-Aware Bayesian Factorization Machines** is applied to resolved this matter. Context-Aware Factorization Machine utilize these categorical features on its interaction term toward the users-items and optimizing using **Monte Carlo Markov Chain (MCMC)** algorithm. These algorithm can also applied with two or more categorical features (e.g genre, price-range, released date-range) with high dimensionality by utilize it's factorization machine of degree. **Total RMSE evaluation implies that this recommendation system performance indeed have lower RMSE rather than Neighborhood CF**.
+- Our objective is to recommend a games within medium price range to increase likelihood of user purchases. **Context-Aware Bayesian Factorization Machines** is applied to resolved this matter. In particular, the recommendation make use of categorical features, enhanchin interactions between users and items while optimizing through the **Monte Carlo Markov Chain (MCMC) algorithm**. This approaches is versatile to handle multiple categorical features, including genre, price range, and released date, even in high-dimensional settings, thanks to its factorization capabilities.
 
-- This Context-Aware Bayesian Factorization Machines is indeed applicable to another context like genre-related feature when we want to create recommendation system model that more related to user's genre or even location preference.
+- Our evaluation, based on total **RMSE (Root Mean Square Error)**, demonstrates that **Context-Aware Bayesian Factorization Machines** consistently outperforms Neighborhood Collaborative Filtering in terms of accuracy.
 
-- **Alternating Least Square** used to utilize *implicit data* like total hours user spent on few games, but ALS do have **low NDCG score** due to much unique games in dataset. However the implicit data should be utilized more with context-aware to maximize the output of recommendation system since most of the user prefer not to give rating on games they interacted with.
+- **Alternating Least Squares (ALS)** is a technique commonly used to leverage **implicit data**, such as the total hours users spend on a few games. However, ALS often yields a **lower Normalized Discounted Cumulative Gain (NDCG) score**, especially when dealing with datasets containing a large number of unique games. This occurs because ALS struggles to effectively model the vast diversity of games present.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-# REFERENCES
+# References
+
+1. Bayer, Immanuel. "*fastfm: A library for factorization machines.*" arXiv preprint arXiv:1505.00641 (2015).
+2. Kaminskas, Marius and Derek, Bridge. "*Diversity, Serendipity, Novelty, and Coverage: A Survey and Empirical Analysis of Beyond-Accuracy Objectives in Recommender Systems*." ACM Transactions on Interactive Intelligent Systems. Vol. 7. No. 1. Article. 2. ACM, 2016.
+3. Hssina, Badr., Abdelakder, Grota., Mohammed, Erritali. "*Recommendation system using the k-nearest neighbors and singular value decomposition algorithms*." International Journal of Electrical and Computer Engineering (IJECE). Vol. 11. No. 6. IJECE, 2021.
+4. Hu, Yifan., Yehuda, Koren., and Chris, Volinsky. "*Collaborative Filtering for Implicit Feedback Datasets*." 2008 IEEE International Conference on Data Mining (ICDM). IEEE, 2008.
+5. Rendle, Steffen. "*Factorization machines*." 2010 IEEE International Conference on Data Mining. IEEE, 2010.
+6. Rendle, Steffen. "*Scaling factorization machines to relational data*." Proceedings of the VLDB Endowment. Vol. 6. No. 5. VLDB Endowment, 2013.
 
 
 

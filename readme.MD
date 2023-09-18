@@ -271,11 +271,11 @@ def stem(text):
 
 **Term-Frequency** is giving each word weight/value based on their occurence, rather than perform One Hot Encoder to split a word into a new feature.
 
-$$ TF(word,document) = \frac{Number \ of \ word \ appear \ in \ a \ document}{Total \ word \ in \ a \ document} $$
+$$  TF(word,document) = \frac{Number \ of \ word \ appear \ in \ a \ document}{Total \ word \ in \ a \ document} $$ 
 
 However some frequent word can put into a sentence, hence term-frequency becoming bigger compared to other, and need to adjust to get better added value. **Inverse Document Frequency** can penalized the TF Score, means that if a term appears in many documents, its IDF value will decrease.
 
-$$ IDF(word, document) = \log({\frac{Total \ Number \ of \ Document \ in \ corpus}{Number \ of \ Documents \ with \ word}}) $$
+$$  IDF(word, document) = \log({\frac{Total \ Number \ of \ Document \ in \ corpus}{Number \ of \ Documents \ with \ word}}) $$ 
 
 ```python
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -293,7 +293,7 @@ Cosine similarity measure the direction between the two items or word. The cosin
 - If θ = 0°, the ‘x’ and ‘y’ vectors overlap, thus proving they are similar.<br>
 - If θ = 90°, the ‘x’ and ‘y’ vectors are dissimilar.
 
-$$ \cos{\theta{}} = \frac{A.B}{\lVert A \rVert  \ \lVert B \rVert} $$
+$$  \cos{\theta{}} = \frac{A.B}{\lVert A \rVert  \ \lVert B \rVert} $$ 
 
 <p align=center>
 <img src="pics/2.png">
@@ -337,7 +337,7 @@ The games we searched for similarity is Assassin's Creed Odyssey, and its found 
 
 Novelty measure how unknown the items by all user in our dataset.
 
-$$ Novelty(item_{i}) = \frac{count(user \ who \ has \ not \ interacted \ with \ item \ i)}{count(all \ user)}  $$
+$$  Novelty(item_{i}) = \frac{count(user \ who \ has \ not \ interacted \ with \ item \ i)}{count(all \ user)}  $$ 
 
 - Novelty ~= 0, items is well known by all users
 - Novelty ~= 1, items is unknown by all users
@@ -369,11 +369,11 @@ Serependity refers to ability to provide recommendation that are both surprising
 
 Serependity is simply combination of **Relevance** of items and **Unexpectedness** of item.
 
-$$ Serependity(item_{i} = Relevance(item_{i}) * Unexpectedness(item_{i})) $$
+$$  Serependity(item_{i} = Relevance(item_{i}) * Unexpectedness(item_{i})) $$ 
 
 Unexpectedness refer to the recommendation is not similar item to past recommendation
 
-$$ Unexpectedness(i) = \frac{\sum_{hEH} (1-Similarity(i,h))}{Number \ of \ H} $$
+$$  Unexpectedness(i) = \frac{\sum_{hEH} (1-Similarity(i,h))}{Number \ of \ H} $$ 
 
 while i = item in user recommendation<br>
 &emsp;&emsp; H = Historical item interaction list(such as rating activity, click, etc)
@@ -428,7 +428,7 @@ Neighborhood Collaborative Filtering Approach work by finding similarities eithe
 
 Lets given a two user of user-u and user-j with two item-i and item-h, for item-to-item CF, we will defined similarity between item-i and item-h.
 
-$$\hat{r}_{ui} = baseline_{u,i} + \frac{\sum_{j∈N(u)}(Similarity(i,h). \ (r_{ji} - baseline_{u,h}))}{\sum_{j∈N(u)} Similarity(i,h)}$$
+$$ \hat{r}_{ui} = baseline_{u,i} + \frac{\sum_{j∈N(u)}(Similarity(i,h). \ (r_{ji} - baseline_{u,h}))}{\sum_{j∈N(u)} Similarity(i,h)}$$ 
 
 $\hat{r}_{ui}$ = Predicted ratings from user u on item i<br>
 $r_{ji}$ = ratings from user j on item i<br>
@@ -467,7 +467,7 @@ In user-to-user CF, we will predict rating that will given by user to certain it
 
 The prediction function for user-to-user is similar with the function for item-to-item CF but rather than compute similarity between item-i and item-h we will compute similarity between user-u and user-j
 
-$$\hat{r}_{ui} = baseline_{u,i} + \frac{\sum_{j∈N(u)}(Similarity(u,j). \ (r_{ji} - baseline_{j,i}))}{\sum_{j∈N(u)} Similarity(u,j)}$$
+$$ \hat{r}_{ui} = baseline_{u,i} + \frac{\sum_{j∈N(u)}(Similarity(u,j). \ (r_{ji} - baseline_{j,i}))}{\sum_{j∈N(u)} Similarity(u,j)}$$ 
 
 $\hat{r}_{ui}$ = Predicted ratings from user u on item i<br>
 $r_{ji}$ = ratings from user j on item i<br>
@@ -518,14 +518,14 @@ Added context such as genre, will add more dimensionality to our utility matrix 
 
 Since we have more feature of users, items, and genres, we can apply regression function to predict rating (y):
 
-$$ f(x) = w_{user}.user + w_{item}.item + w_{genre}.genre $$
+$$  f(x) = w_{user}.user + w_{item}.item + w_{genre}.genre $$ 
 
 However, we may needed to consider user and item interaction as factorization machine approachs. The model equation for a factorization
 machine of degree d = 2 is defined as (Rendle, 2010):
 
-$$ f(x) = w_{0} +   \sum_{n=i} w_{i}.x_{i} + \sum_{n=i}\sum_{j=i+1} w_{i,j}.x_{i}.x_{j} $$
+$$  f(x) = w_{0} +   \sum_{n=i} w_{i}.x_{i} + \sum_{n=i}\sum_{j=i+1} w_{i,j}.x_{i}.x_{j} $$ 
 
-$$ f(x) = w_{0} +   \sum_{n=i} w_{i}.x_{i} + \sum_{n=i}\sum_{j=i+1} <v_{i},v_{j}>x_{i}.x_{j} $$
+$$  f(x) = w_{0} +   \sum_{n=i} w_{i}.x_{i} + \sum_{n=i}\sum_{j=i+1} <v_{i},v_{j}>x_{i}.x_{j} $$ 
 
 $w_{0}$ = intercept <br>
 $w_{i}$ = feature weight or 'coefficient'<br>
@@ -535,7 +535,7 @@ $x_{i},x_{j}$ = feature value<br>
 
 The first part of the FM model contains the unary interactions of each input variable $x_{i}$ with the target—exactly as in a linear regression model. The second part with the two nested sums contains all pairwise interaction of input variabls, that is $x_{i},x_{j}$.The important difference to standard polynomial regression is that the effect of the interaction is not modeled by an independent parameter $w_{i,j}$ but with a factorized parametrization $w_{ij} ≈ \ <v_{i},v_{j}> \ = \sum^{k}_{f}v_{i,f}.v_{j,f}$, which corresponds to the assumption that the effect of pairwise interactions has a low rank. This allows FM to estimates reliable parameter even in highly sparse data where standard models fail (Rendle, 2012).
 
-$$ f(x) = w_{0} + \sum^{n}_{i=1}w_{i}.x_{i} + \frac{1}{2}\sum^{k}_{f=1}[(\sum^{n}_{i}v_{i,f}.x_{i})^2 - \sum^{n}_{i=1}v_{j,f}^2.x_{j}^2] $$
+$$  f(x) = w_{0} + \sum^{n}_{i=1}w_{i}.x_{i} + \frac{1}{2}\sum^{k}_{f=1}[(\sum^{n}_{i}v_{i,f}.x_{i})^2 - \sum^{n}_{i=1}v_{j,f}^2.x_{j}^2] $$ 
 
 $v_{i,f}$ = latent factor value from feature i at position f (scalar) <br>
 $k$ = number of latent factor
@@ -544,7 +544,7 @@ Factorization machines can estimate interactions even in high sparsity data beca
 
 The FM model of order d = 2 can be extended by factorizing ternary and higher-order variable interactions. The higher-order FM model is followed by (Rendle, 2010):
 
-$$\hat{y(x)} := w_{0} + \sum^{n}_{i=1}w_{i}x_{i} + \sum^{d}_{l=2}\sum^{n}_{j=i} ... \sum^{n}_{j_{d}=j_{d-1}+1}(\prod^{l}_{i=1}x_{j}) \sum^{k}_{f=1}\prod^{l}_{i=1}v_{j,f} $$
+$$ \hat{y(x)} := w_{0} + \sum^{n}_{i=1}w_{i}x_{i} + \sum^{d}_{l=2}\sum^{n}_{j=i} ... \sum^{n}_{j_{d}=j_{d-1}+1}(\prod^{l}_{i=1}x_{j}) \sum^{k}_{f=1}\prod^{l}_{i=1}v_{j,f} $$ 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -552,12 +552,12 @@ $$\hat{y(x)} := w_{0} + \sum^{n}_{i=1}w_{i}x_{i} + \sum^{d}_{l=2}\sum^{n}_{j=i} 
 
 The objective of this task is to minimize squared error of predicted value - true value, and loss function that commonly use is Mean Squared Error (MSE).
 
-$$Objective = min(\frac{1}{2}\sum^{N}_{i=1}(y_{i} - \hat{y_{i}}^2)) $$
+$$ Objective = min(\frac{1}{2}\sum^{N}_{i=1}(y_{i} - \hat{y_{i}}^2)) $$ 
 
 Since out feature is highly sparse, prediction model might lead to overfitting. To avoid overfitting case, Regularization term such as L2 Norm (Ridge Regularization) can be added to cost function. Three optimzation methods have been proposed for FM: stochastic gradient descent
 (SGD) [Rendle 2010], alternating least-squares (ALS) [Rendle et al. 2011], and Markov Chain Monte Carlo (MCMC) inference [Freudenthaler et al. 2011].
 
-$$Objective = min\frac{1}{2}\sum^{N}_{i=1}[(y_{i} - \hat{y_{i}}^2)] + \frac{1}{2}\sum_{i=1}[\alpha{}(w_{i}^2 + \lVert v_{i} \rVert^2)]$$
+$$ Objective = min\frac{1}{2}\sum^{N}_{i=1}[(y_{i} - \hat{y_{i}}^2)] + \frac{1}{2}\sum_{i=1}[\alpha{}(w_{i}^2 + \lVert v_{i} \rVert^2)]$$ 
 
 ### FM: Regression Model
 
@@ -616,15 +616,15 @@ The recommendations for expensive games seem to be more in line with the user's 
 
 Classification problem calculate probability that x is belong to class 1, so sigmoid function is used to approximate the probability of the function.
 
-$$\sigma{(\hat{y}(x))} = p(x) = \frac{1}{1 + e^{-(\hat{y}(x))}} $$
+$$  \sigma{(\hat{y}(x))} = p(x) = \frac{1}{1 + e^{-(\hat{y}(x))}} $$ 
 
 The objective of classification task is to maximize the probability of a class.
 
-$$Objective = \max_{w}[\prod^{N}_{i=1}P(y_{i}|X^{(i)},w)] $$
+$$  Objective = \max_{w}[\prod^{N}_{i=1}P(y_{i}|X^{(i)},w)] $$ 
 
 Multiplication function will cost computational time greatly, then we work on a logarithmic scale, because PDF term is additive.
 
-$$Objective = \min_{w*,v*}[-\frac{1}{N}\sum_{iED}(y^{(i)}.log(p(x^{(i)})) + (1-y^{(i)}).(1-log(p(x^{(i)}))))] + [\frac{1}{2}\sum_{m}(w^2 + \lVert v_{m} \rVert^2)] $$
+$$  Objective = \min_{w*,v*}[-\frac{1}{N}\sum_{iED}(y^{(i)}.log(p(x^{(i)})) + (1-y^{(i)}).(1-log(p(x^{(i)}))))] + [\frac{1}{2}\sum_{m}(w^2 + \lVert v_{m} \rVert^2)] $$ 
 
 - $y_{i}$ = True Class
 - $p(x^{(i)})$ = Probability that x belongs to class 1
@@ -673,11 +673,11 @@ Accuracy score given by Classification model to predict whether certain User IDs
 
 Utilizing implicit data is tends to takes more in account to consider which user does higher preference, because we do not have scale of preference like explicit data. We just simply create mapping rule to encode play hours into binary value such as preference. By encoding user utility value into binary vaue does not solve which user are having more strong preference/confidence. We could add term confidence (c) which equal to 
 
-$$ c_{ui} = 1 + \alpha{r_{ui}} $$
+$$  c_{ui} = 1 + \alpha{r_{ui}} $$ 
 
 We want to predict class of user's preference, we could imply that user u preference over item i ($p_{ui}$) could be produced from interaction factor between user and item factor
 
-$$ \hat{p_{ui}} = x_{u}.y^{T}_{i} $$
+$$  \hat{p_{ui}} = x_{u}.y^{T}_{i} $$ 
 
 $c_{ui}$ = Confidence term from user u to item i<br>
 $r_{ui}$ = utility value from user u to item i<br>
@@ -687,27 +687,27 @@ $y_{i}$ = item i factor
 
 The objective is minimize prediction error of preference from each user to each item in training data, but we might not know the difference between two user who has played the same game. we suspected that the more user spent to play the game, the stronger the confidence, hence we could add confidence term in our objective function.
 
-$$Objective = min\sum_{u,i} c_{ui} (p_{ui} - \hat{p_{ui}})^2 $$
+$$  Objective = min \sum_{u,i} c_{ui} (p_{ui} - \hat{p_{ui}})^2 $$ 
 
 We can add Ridge Regularization (L2 Norm) to our user and item factor, our purpose to generate prediction on item that user might have not played yet, thus the weight should not be zero
 
-$$Objective = min\sum_{u,i} c_{ui} (p_{ui} - \hat{p_{ui}})^2 + \lambda(\sum_{u}\lVert x_{u} \rVert^2 + \sum_{i}\lVert y_{i} \rVert^2) $$
+$$  Objective = min \sum_{u,i} c_{ui} (p_{ui} - \hat{p_{ui}})^2 + \lambda(\sum_{u} \lVert x_{u} \rVert^2 + \sum_{i} \lVert y_{i} \rVert^2) $$ 
 
 Here our final objective form
 
-$$ Objective = \min_{x*,y*}\sum_{u,i} c_{ui} (p_{ui} - x^{T}_{u}.y^{T}_{i})^2 + \lambda(\sum_{u}\lVert x_{u} \rVert^2 + \sum_{i}\lVert y_{i} \rVert^2) $$
+$$  Objective = \min_{x*,y*}\sum_{u,i} c_{ui} (p_{ui} - x^{T}_{u}.y^{T}_{i})^2 + \lambda(\sum_{u}\lVert x_{u} \rVert^2 + \sum_{i}\lVert y_{i} \rVert^2) $$ 
 
 Alternating least square is applied to optimize the objective form by updating each parameter while holding constant user factor when updating item factor and vice versa. The approach is similar to Gradient Descent by find partial derivative from objective function to our parameter
 
-$\frac{\partial{Objective}}{\partial{\theta}} = 0 $ while our parameter $\theta = x_{u}$ or $y_{i}$.
+$ \frac{\partial{Objective}}{\partial{\theta}} = 0 $ while our parameter $\theta = x_{u}$ or $y_{i}$.
 
 Using the partial derivative function above to each factor, we can obtain update to user factor while holding item factor constant,
 
-$$ x_{u} = (Y^T.C^u.Y + \lambda{I})^{-1} . (Y^T.C^u.p(u)) $$
+$$  x_{u} = (Y^T.C^u.Y + \lambda{I})^{-1} . (Y^T.C^u.p(u)) $$ 
 
 and obtain the update to item factor while holding user factor constant,
 
-$$ y_{i} = (X^T.C^i.X + \lambda{I})^{-1} . (X^T.C^i.p(i)) $$
+$$  y_{i} = (X^T.C^i.X + \lambda{I})^{-1} . (X^T.C^i.p(i)) $$ 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

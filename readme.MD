@@ -27,7 +27,7 @@
       <li><a href="#cosine-similarity">Cosine Similarity</a></li>
       <li><a href="#content-similar-recommendation">Similarity Recommendation</a></li>
       <li><a href="#novelty">Novelty</a></li>
-      <li><a href="#serependity">Serependity</a></li>
+      <li><a href="#Serendipity">Serendipity</a></li>
     </ul>
   </li>
   <li>
@@ -73,7 +73,7 @@ On the flip side, the recommender system in marketplace is commonly also affecte
 
 Our goal is to develop a recommendation system approach for product suggestions, with a focus on middle-tier users who make purchasing decisions based on their given ratings or preferences (as indicated by their activity logs). We aim to identify hidden gems, which could be either budget-friendly on medium price range options or lesser-known games from smaller developers, rather than those produced by major game developers.
 
-- First method is **Content-based recommendation system**, is to generate more similar games but, focusing in **novelty** (how unknown user to related item) and **serependity** (how related the item to user) to help users discover new gaming experiences.
+- First method is **Content-based recommendation system**, is to generate more similar games but, focusing in **novelty** (how unknown user to related item) and **Serendipity** (how related the item to user) to help users discover new gaming experiences.
 
 - Second, is **Collaborative Filtering** with **Context-Aware Factorization Machine** for price rate and release date of games to give recommendation based on rating given (*Regression*) and do user recommend it or not (*Classification*).
 
@@ -125,7 +125,7 @@ The datasets is retrieved from Kaggle Dataset of [**Steam's user log**](https://
 There are several datasets setting that we are used in this project to observed several Recommendation System model performance.
 
 1. *Table 1: User IDs, App IDs, title, categories, genre, popular tags, and game_description*. <br>
-This table is used to utilize the **content-based recommendation system** by ignoring user preference, and just calculate similarity between games based on game's title, genre, tags and description (App IDs). Dimension of data used is 1000_000 x 7, and will be increase by being added Interaction counts, Novelty scores, Serependity scores features to calculate those feature effect to recommendation.
+This table is used to utilize the **content-based recommendation system** by ignoring user preference, and just calculate similarity between games based on game's title, genre, tags and description (App IDs). Dimension of data used is 1000_000 x 7, and will be increase by being added Interaction counts, Novelty scores, Serendipity scores features to calculate those feature effect to recommendation.
 
 2. *Table 2: User IDs, App IDs, Rating*.<br>
 This table is only contains user_id, app_id and rating given by user to certain games. The ratings given will be classified into certain ordinal class, and utility matrix is given by these features. Dimension of data used is highly reduced to 20_000 x 3, since it will harm computational cost we will split using [`train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) from `sklearn.model_selection` libraries. **Neighborhood Collaborative Filtering** is applied to this dataset.
@@ -363,13 +363,13 @@ The novelty score can generate high scores, primarily due to the large number of
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Serependity
+### Serendipity
 
-Serependity refers to ability to provide recommendation that are both surprising and useful. These are not only novel and diverse like previous, but also relevant to the user's interest. It's challenging to create a precise function for serendipity because it depends on various factors and is highly subjective. However, you can create a simple Python function to calculate a basic serendipity score based on some criteria.
+Serendipity refers to ability to provide recommendation that are both surprising and useful. These are not only novel and diverse like previous, but also relevant to the user's interest. It's challenging to create a precise function for serendipity because it depends on various factors and is highly subjective. However, you can create a simple Python function to calculate a basic serendipity score based on some criteria.
 
-Serependity is simply combination of **Relevance** of items and **Unexpectedness** of item.
+Serendipity is simply combination of **Relevance** of items and **Unexpectedness** of item.
 
-$$  Serependity(item_{i} = Relevance(item_{i}) * Unexpectedness(item_{i})) $$ 
+$$  Serendipity(item_{i} = Relevance(item_{i}) * Unexpectedness(item_{i})) $$ 
 
 Unexpectedness refer to the recommendation is not similar item to past recommendation
 
@@ -378,7 +378,7 @@ $$  Unexpectedness(i) = \frac{\sum_{hEH} (1-Similarity(i,h))}{Number \ of \ H} $
 while i = item in user recommendation<br>
 &emsp;&emsp; H = Historical item interaction list(such as rating activity, click, etc)
 
-#### Serependity and Similar Recommendation
+#### Serendipity and Similar Recommendation
 
 <p align=left>
 <img src="pics/5.png" width=70%>
@@ -798,7 +798,7 @@ Recommendation given by models represents few well-known games and seemingly rel
 
 - **Content-based recommendation** enhanced by the **Novelty Score**, offers more variability into its game suggestions compared to previous similarity-based approaches. Similar recommendation tend to align with similar genres or popular tags, but novelty is calculated based on user interactions. The novelty-score-driven recommendation system offers a more effective and diverse user experience, but it's important to strike a balance between novelty and relevance, considering factors such as release date and user interaction counts.
 
-- **Content-based recommendation** incorporating **Serependity**, offers more diverses game suggestions while maintaining relevance to the searched game's genre or popular tags. The serependity score is designed to introduce element of surprise and novelty into the recommendations, which can help users discover new gaming experiences. It takes into account various factors that may not be directly tied to the primary characteristics of the searched game. The benefit of this approach is that it can prevent the recommendation system from becoming too predictable and may lead users to discover unexpected yet enjoyable games. However, it's important to strike a balance, as excessive randomness may result in less relevant suggestions. 
+- **Content-based recommendation** incorporating **Serendipity**, offers more diverses game suggestions while maintaining relevance to the searched game's genre or popular tags. The Serendipity score is designed to introduce element of surprise and novelty into the recommendations, which can help users discover new gaming experiences. It takes into account various factors that may not be directly tied to the primary characteristics of the searched game. The benefit of this approach is that it can prevent the recommendation system from becoming too predictable and may lead users to discover unexpected yet enjoyable games. However, it's important to strike a balance, as excessive randomness may result in less relevant suggestions. 
 
 - **K-Nearest Neighbors Baseline (KNNBaseline) algorithm** from the **Surprise** library, is applied to both user-to-user and item-to-item **Collaborative Filtering**, to predict user ratings for specific items.  In our evaluation, we observed that Collaborative Filtering, both **user-to-user and item-to-item, yielded an RMSE (Root Mean Square Error) of approximately 0.691 and 0.692**, respectively. While these RMSE values indicate relatively accurate predictions, they do not fully capitalize on the incorporation of additional contextual factors, such as game pricing or release dates, which was one of our primary objectives.
 
